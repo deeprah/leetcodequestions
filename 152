@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int n=nums.size();
+        long long pref=1;
+        long long suff=1;
+        long long product=nums[0];
+        for(int i=0;i<n;i++)
+        {
+            if(pref==0) pref=1;
+            if(suff==0)  suff=1;
+           
+            pref*=nums[i];
+            suff*=nums[n-i-1];
+            if(pref==-1000000000000 || suff==-1000000000000 )
+            {
+                return pow(10,9);
+            }
+            product=max(product,max(pref,suff));
+        }
+        return product;
+        
+    }
+};
