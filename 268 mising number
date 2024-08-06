@@ -1,0 +1,65 @@
+method 1
+
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<n;i++)
+        {
+            if(nums[i]!=i)
+            {
+                return i;
+            }
+
+        }
+        return n;
+        
+    }
+};   
+
+
+
+
+method 2 cycle sort O(n) t.c and s.c is O(1)
+
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n=nums.size();
+        int i=0;
+        while(i<n)
+        {
+           int correctindx=nums[i];
+            if(i==correctindx || nums[i]==n) i++;
+            else
+            {
+                swap(nums[i],nums[correctindx]);
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(i!=nums[i])
+            return i;
+        }
+        return n;
+    }
+};   
+
+
+METHOD -3 SUM
+
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n=nums.size();
+        int actualsum=n*(n+1)/2;
+        int sum=0;
+        for(int i=0;i<n;i++)
+        {
+           sum+=nums[i];
+        }
+        return actualsum-sum;
+
+    }
+};
