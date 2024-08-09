@@ -1,0 +1,43 @@
+class Solution {
+public:
+    int bestClosingTime(string customers) {
+        int n=customers.size();
+        vector<int> pref(n+1,0);
+        vector<int> suff(n+1,0);
+        int pentbefore=0;
+        // in pref arrayb we find the number of n before the index 
+        for(int i=1;i<n+1;i++)
+        {
+            if(customers[i-1]=='N')
+            {
+                    pentbefore++;
+            }
+            pref[i]=pentbefore;
+        }
+        int pentafter=0;
+        // in suffix array we find then number of y after index
+        
+        for(int i=n-1;i>=0;i--)
+        {
+            if(customers[i]=='Y')
+            {
+                pentafter++;
+            }
+            suff[i]=pentafter;
+        }
+        int minpenalty=INT_MAX;
+        int bestime=0;
+        // in that lop we add penaltybefore and after add aadd in pref arryif prefarrya less than minpenalty then minpenalty equal to pref[i toatl penalty and return the first index that have least penalty
+        for(int i=0;i<n+1;i++)
+        { pref[i]+=suff[i];
+                 if(pref[i]<minpenalty)
+                 {
+                    minpenalty=pref[i];
+                    bestime=i;
+                 }
+        }
+        return bestime;
+
+        
+    }
+};
