@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<int> answerQueries(vector<int>& nums, vector<int>& queries) {
+        int n=nums.size();
+        int m=queries.size();
+        sort(nums.begin(),nums.end());
+        for(int i=1;i<n;i++)
+        {
+            nums[i]+=nums[i-1];
+        }
+        vector<int> ans(m);
+        
+        for(int i=0;i<m;i++)
+        {
+            int count=0;
+            int f=0;
+            int l=n-1;
+            while(f<=l)
+            {
+                int mid=(f+l)/2;
+                if(nums[mid]>queries[i]) l=mid-1;
+                else // nums[mid]<=queries[i]
+            {
+                count=mid+1;
+                f=mid+1;
+
+            }
+            }
+           
+            ans[i]=count;
+        }
+        return ans;
+        
+    }
+};
+            
